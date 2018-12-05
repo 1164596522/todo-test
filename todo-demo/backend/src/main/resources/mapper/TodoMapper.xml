@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf147.todo.mapper.TodoMapper">
+
+  <select id="getTodos" resultType="todo">
+    select * from todo
+  </select>
+
+  <select id="viewDetails" resultType="todo">
+    select * from todo where id=#{id}
+  </select>
+
+  <select id="getUnfinishedTodos" resultType="todo">
+    select * from todo where state='未完成'
+  </select>
+
+  <select id="getOngoingTodos" resultType="todo">
+    select * from todo where state='进行中'
+  </select>
+
+  <select id="getCompletedTodos" resultType="todo">
+    select * from todo  where state='已完成'
+  </select>
+
+  <insert id="addTodo">
+    insert into todo (
+      name, detail,created_at,finished_at,state
+    ) values (
+      #{name}, #{detail},#{createdAt},#{finishedAt},#{state}
+    )
+  </insert>
+
+  <delete id="deleteTodo">
+    delete from todo where id=#{id}
+  </delete>
+
+  <update id="makeDone">
+    update todo set state='已完成' where id=#{id}
+  </update>
+
+  <update id="makeConduct">
+    update todo set state='进行中' where id=#{id}
+  </update>
+</mapper>
